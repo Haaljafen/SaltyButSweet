@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Settings")]
     public int startingLives = 3;
-    public float gameDuration = 210f; // 3.5 minutes
+    public float gameDuration = 180f;
 
     [Header("HUD References")]
     public TextMeshProUGUI timerText;

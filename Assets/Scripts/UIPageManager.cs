@@ -130,9 +130,9 @@ public class UIPageManager : MonoBehaviour
         hudPanel.SetActive(false);
         winPanel.SetActive(true);
 
-        if (star1 != null) star1.SetActive(stars >= 1);
-        if (star2 != null) star2.SetActive(stars >= 2);
-        if (star3 != null) star3.SetActive(stars >= 3);
+        if (star1 != null) star1.SetActive(stars == 1);
+        if (star2 != null) star2.SetActive(stars == 2);
+        if (star3 != null) star3.SetActive(stars == 3);
 
         Time.timeScale = 0f;
     }

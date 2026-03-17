@@ -140,11 +140,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39568d143f92b4c75b7417657156ee1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thoughtBubble: {fileID: 0}
-  thoughtBubbleIcon: {fileID: 0}
-  foodSprites: []
   maxPatience: 30
+  impatientThreshold: 0.3
   patienceBar: {fileID: 0}
   moneyReward: 10
+  tipAmount: 2
   moneyPrefab: {fileID: 0}
   moveSpeed: 2
+  idleLookInterval: 2.5
+  idleLookAngle: 25
+  idleLookSpeed: 90
+  orderVoiceClips:
+  - {fileID: 8300000, guid: ba4850a7d689d4d488fa089e658c460e, type: 3}
+  - {fileID: 8300000, guid: c9a7103a0f2324be99317ca338e240ba, type: 3}
+  - {fileID: 8300000, guid: abd2945322f9140d68607880bfa735b3, type: 3}
+  - {fileID: 8300000, guid: 146b1f7c609a844de972002161913ff1, type: 3}
+  - {fileID: 8300000, guid: 540d97fca9f484b3f9c9784501d9585c, type: 3}
+  - {fileID: 8300000, guid: 5dc8fa9bd7d7c4cb8948dfb0fe8a6ff4, type: 3}
+  - {fileID: 8300000, guid: 0e5082a014b0d4ed99c2e9891b87180b, type: 3}
+  servedMessages:
+  - Thank you!
+  - Delicious!
+  - Perfect!
+  servedVoiceClips:
+  - {fileID: 8300000, guid: e45232a2ade4c41cfab7e017e6edbffe, type: 3}
+  - {fileID: 8300000, guid: 1aee68aae2ba54ea9808f088016b9984, type: 3}
+  - {fileID: 8300000, guid: e35afdad2bba842b89cc0602564db8b5, type: 3}
+  angryMessages:
+  - I'm never coming back here!
+  - Unbelievable!
+  angryVoiceClips:
+  - {fileID: 8300000, guid: 93a184765c8a54c6a962f91d9ab59c46, type: 3}
+  - {fileID: 8300000, guid: 15b6eabe9aa5e464ba603cca72dfc2ac, type: 3}
+  impatientVoiceClips:
+  - {fileID: 8300000, guid: 6473ff7a3bb1a4804979f4279dc83020, type: 3}
+  - {fileID: 8300000, guid: b8f8b20961003438a8f99ea168db073b, type: 3}
+  - {fileID: 8300000, guid: 42c0ad26e484d473ca885b48784bb0e5, type: 3}

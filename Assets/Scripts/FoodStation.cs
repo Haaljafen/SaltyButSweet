@@ -20,22 +20,25 @@ public class FoodStation : MonoBehaviour
     public Slider          progressBar;
     public TextMeshProUGUI preparingText;
 
+    private static bool anyStationPreparing = false;
+
     private bool playerInRange = false;
     private bool isPreparing   = false;
 
     void Update()
     {
         bool counterFull = counterZone != null && counterZone.IsFull;
+        bool blocked = isPreparing || anyStationPreparing;
 
         // Show prompt: "Counter is Full!" or "Press E to Order"
-        if (playerInRange && !isPreparing && interactPrompt != null)
+        if (playerInRange && !blocked && interactPrompt != null)
         {
             interactPrompt.SetActive(true);
             if (interactText)
                 interactText.text = counterFull ? "Counter is Full!" : "Press E to Order";
         }
 
-        if (playerInRange && !isPreparing && !counterFull && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && !blocked && !counterFull && Input.GetKeyDown(KeyCode.E))
             StartCoroutine(PrepareFood());
     }
 
@@ -61,6 +64,7 @@ public class FoodStation : MonoBehaviour
     IEnumerator PrepareFood()
     {
         isPreparing = true;
+        anyStationPreparing = true;
 
         if (interactPrompt != null) interactPrompt.SetActive(false);
         if (preparingUI    != null) preparingUI.SetActive(true);
@@ -84,6 +88,7 @@ public class FoodStation : MonoBehaviour
         SpawnPlateAtCounter();
 
         isPreparing = false;
+        anyStationPreparing = false;
 
         if (playerInRange && interactPrompt != null)
             interactPrompt.SetActive(true);
@@ -93,6 +98,7 @@ public class FoodStation : MonoBehaviour
     {
         if (preparingUI != null) preparingUI.SetActive(false);
         if (interactPrompt != null) interactPrompt.SetActive(false);
+        if (isPreparing) { isPreparing = false; anyStationPreparing = false; }
     }
 
     void SpawnPlateAtCounter()

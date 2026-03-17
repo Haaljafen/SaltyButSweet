@@ -12,22 +12,16 @@ public class SettingsManager : MonoBehaviour
     public GameObject musicButtonOn;
     public GameObject musicButtonOff;
 
-    [Header("Vibration")]
-    public GameObject vibrationButtonOn;   // virButtonOn
-    public GameObject vibrationButtonOff;  // virButtonOff
-
-    public bool SoundEnabled     { get; private set; }
-    public bool MusicEnabled     { get; private set; }
-    public bool VibrationEnabled { get; private set; }
+    public bool SoundEnabled { get; private set; }
+    public bool MusicEnabled { get; private set; }
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else { Destroy(gameObject); return; }
 
-        SoundEnabled     = PlayerPrefs.GetInt("Sound",     1) == 1;
-        MusicEnabled     = PlayerPrefs.GetInt("Music",     1) == 1;
-        VibrationEnabled = PlayerPrefs.GetInt("Vibration", 1) == 1;
+        SoundEnabled = PlayerPrefs.GetInt("Sound", 1) == 1;
+        MusicEnabled = PlayerPrefs.GetInt("Music", 1) == 1;
     }
 
     void Start()
@@ -58,18 +52,10 @@ public class SettingsManager : MonoBehaviour
         RefreshUI();
     }
 
-    public void ToggleVibration()
-    {
-        VibrationEnabled = !VibrationEnabled;
-        PlayerPrefs.SetInt("Vibration", VibrationEnabled ? 1 : 0);
-        RefreshUI();
-    }
-
     void RefreshUI()
     {
-        SetToggle(soundButtonOn,     soundButtonOff,     SoundEnabled);
-        SetToggle(musicButtonOn,     musicButtonOff,     MusicEnabled);
-        SetToggle(vibrationButtonOn, vibrationButtonOff, VibrationEnabled);
+        SetToggle(soundButtonOn, soundButtonOff, SoundEnabled);
+        SetToggle(musicButtonOn, musicButtonOff, MusicEnabled);
     }
 
     void SetToggle(GameObject on, GameObject off, bool isOn)

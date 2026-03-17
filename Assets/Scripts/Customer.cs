@@ -206,7 +206,8 @@ public class Customer : MonoBehaviour
             {
                 isImpatient = true;
                 SetAnimImpatient(true);
-                PlayVoiceClip(impatientVoiceClips, Random.Range(0, impatientVoiceClips != null ? impatientVoiceClips.Length : 0));
+                if (impatientVoiceClips != null && impatientVoiceClips.Length > 0)
+                    PlayVoiceClip(impatientVoiceClips, Random.Range(0, impatientVoiceClips.Length));
             }
 
             yield return null;
@@ -217,7 +218,8 @@ public class Customer : MonoBehaviour
             // Show angry feedback BEFORE leaving so it's visible
             int angryIdx = Random.Range(0, angryMessages.Length);
             manager.ShowFeedback(angryMessages[angryIdx]);
-            PlayVoiceClip(angryVoiceClips, angryIdx);
+            if (angryVoiceClips != null && angryIdx < angryVoiceClips.Length)
+                PlayVoiceClip(angryVoiceClips, angryIdx);
             GameManager.Instance.LoseLife();
             Leave();
         }
@@ -244,7 +246,8 @@ public class Customer : MonoBehaviour
             // Show happy reaction on the FeedbackPanel and play voice
             int servedIdx = Random.Range(0, servedMessages.Length);
             manager.ShowFeedback(servedMessages[servedIdx]);
-            PlayVoiceClip(servedVoiceClips, servedIdx);
+            if (servedVoiceClips != null && servedIdx < servedVoiceClips.Length)
+                PlayVoiceClip(servedVoiceClips, servedIdx);
 
             StartCoroutine(DelayedLeave());
             return true;
