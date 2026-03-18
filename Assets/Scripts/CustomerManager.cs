@@ -44,6 +44,7 @@ public class CustomerManager : MonoBehaviour
     private List<Customer> activeCustomers = new List<Customer>();
     private bool counterOccupied = false;
     private Coroutine hideFeedbackRoutine;
+    private Image patientSliderFill;
 
     // Awake fires before Start on every object — panels are guaranteed hidden
     // before UIPageManager or anything else reads them.
@@ -138,6 +139,9 @@ public class CustomerManager : MonoBehaviour
         {
             patientSlider.value = 1f;
             patientSlider.gameObject.SetActive(true);
+            if (patientSliderFill == null && patientSlider.fillRect != null)
+                patientSliderFill = patientSlider.fillRect.GetComponent<Image>();
+            if (patientSliderFill != null) patientSliderFill.color = Color.green;
         }
     }
 
@@ -145,6 +149,8 @@ public class CustomerManager : MonoBehaviour
     public void UpdatePatience(float value01)
     {
         if (patientSlider != null) patientSlider.value = value01;
+        if (patientSliderFill != null)
+            patientSliderFill.color = Color.Lerp(Color.red, Color.green, value01);
     }
 
     // ── Shows a reaction bubble (served or angry) for feedbackDuration seconds ─

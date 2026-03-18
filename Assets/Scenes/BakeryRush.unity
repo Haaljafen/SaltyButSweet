@@ -5890,7 +5890,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a066497ca163f4a2dbb0d81e8e5f197d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9a335ada0409486b99d725f7130ffc1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7148,7 +7148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingLives: 3
-  gameDuration: 180
+  gameDuration: 210
   timerText: {fileID: 1950610878}
   moneyText: {fileID: 1332486379}
   heartObjects:
@@ -15927,11 +15927,11 @@ MonoBehaviour:
   lobbyMusic: {fileID: 8300000, guid: 561d8061b2ad94c3d85740c5aeb5a494, type: 3}
   gameplayMusic: {fileID: 8300000, guid: 83482157674974decb6f78dc00994e1c, type: 3}
   gameplayMusicFinal: {fileID: 8300000, guid: 6235511a70c514335bbbfc8829d1ea6d, type: 3}
-  correctOrderClip: {fileID: 0}
-  wrongOrderClip: {fileID: 0}
+  wrongOrderClip: {fileID: 8300000, guid: 7d9c85bdd6a8d4286b6b666f097adcaf, type: 3}
+  counterFullClip: {fileID: 8300000, guid: 06dcac78f11cc4f5989ab60976d631d7, type: 3}
   lifeLostClip: {fileID: 8300000, guid: 8bb58e9c8406f4de19ac258e1a9b37e0, type: 3}
   coinClip: {fileID: 8300000, guid: b7fcd27b11e874cfaaa4c8f6da830c8c, type: 3}
-  trashClip: {fileID: 0}
+  trashClip: {fileID: 8300000, guid: 6e2ae5b812a2642da9e18c8ab2ebd205, type: 3}
   prepStartClip: {fileID: 8300000, guid: c0353d16c65864fd781ce66ed9683152, type: 3}
   prepDoneClip: {fileID: 8300000, guid: 10c3fb1d21edd44f2beb924158eb30bb, type: 3}
   winClip: {fileID: 8300000, guid: 7c7986a9376494608aa4601204b4d43c, type: 3}

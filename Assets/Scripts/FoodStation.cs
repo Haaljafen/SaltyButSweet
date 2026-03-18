@@ -22,13 +22,18 @@ public class FoodStation : MonoBehaviour
 
     private static bool anyStationPreparing = false;
 
-    private bool playerInRange = false;
-    private bool isPreparing   = false;
+    private bool playerInRange  = false;
+    private bool isPreparing    = false;
+    private bool wasCounterFull = false;
 
     void Update()
     {
         bool counterFull = counterZone != null && counterZone.IsFull;
         bool blocked = isPreparing || anyStationPreparing;
+
+        if (playerInRange && counterFull && !wasCounterFull)
+            AudioManager.Instance?.PlaySFX(AudioManager.Instance.counterFullClip);
+        wasCounterFull = counterFull;
 
         // Show prompt: "Counter is Full!" or "Press E to Order"
         if (playerInRange && !blocked && interactPrompt != null)
@@ -49,6 +54,8 @@ public class FoodStation : MonoBehaviour
             playerInRange = true;
             bool counterFull = counterZone != null && counterZone.IsFull;
             if (interactPrompt != null) interactPrompt.SetActive(!counterFull);
+            if (counterFull)
+                AudioManager.Instance?.PlaySFX(AudioManager.Instance.counterFullClip);
         }
     }
 
@@ -56,10 +63,12 @@ public class FoodStation : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
+            playerInRange  = false;
+            wasCounterFull = false;
             if (interactPrompt != null) interactPrompt.SetActive(false);
         }
     }
+
 
     IEnumerator PrepareFood()
     {
@@ -71,7 +80,7 @@ public class FoodStation : MonoBehaviour
         if (preparingText  != null) preparingText.text = "Preparing " + foodName + "...";
         if (progressBar    != null) progressBar.value = 0f;
 
-        AudioManager.Instance?.PlaySFX(AudioManager.Instance.prepStartClip);
+        AudioManager.Instance?.PlaySFX(AudioManager.Instance.prepStartClip, 0.4f);
 
         float elapsed = 0f;
         while (elapsed < preparationTime)

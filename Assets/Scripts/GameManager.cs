@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
         if (won)
         {
             AudioManager.Instance?.PlaySFX(AudioManager.Instance.winClip);
-            int stars = money >= 150 ? 3 : money >= 100 ? 2 : money >= 50 ? 1 : 1;
+            int stars = money >= 150 ? 3 : money >= 80 ? 2 : 1;
             uiManager.ShowWin(stars);
         }
         else

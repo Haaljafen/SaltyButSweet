@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlateController : MonoBehaviour
 {
     public FoodType foodType = FoodType.None;
-    public bool isPickedUp   = false;
 
     public void SetFood(FoodType type)
     {

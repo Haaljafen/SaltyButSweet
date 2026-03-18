@@ -64,7 +64,11 @@ public class PlayerInteraction : MonoBehaviour
     void HandleR()
     {
         GameObject nearest = GetNearestPlate();
-        if (nearest != null) Destroy(nearest);
+        if (nearest != null)
+        {
+            AudioManager.Instance?.PlaySFX(AudioManager.Instance.trashClip, 0.2f);
+            Destroy(nearest);
+        }
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

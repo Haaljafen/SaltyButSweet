@@ -29,6 +29,7 @@ public class Customer : MonoBehaviour
     [Range(0f, 1f)]
     public float impatientThreshold = 0.3f;
     public Slider patienceBar; // World-space slider above customer (optional)
+    public UnityEngine.UI.Image patienceBarFillImage; // Drag the Fill image here
 
     [Header("Reward")]
     [Tooltip("Base money added to GameManager when this customer is served correctly")]
@@ -77,6 +78,19 @@ public class Customer : MonoBehaviour
 
     private Animator      animator;
     private Quaternion    counterFacingRot;
+    private UnityEngine.UI.Image patienceBarFill;
+
+    static int FoodPrice(FoodType food) => food switch
+    {
+        FoodType.Donut     => 3,
+        FoodType.Cookie    => 3,
+        FoodType.Croissant => 8,
+        FoodType.Bread     => 2,
+        FoodType.Cake      => 10,
+        FoodType.Macaron   => 8,
+        FoodType.Coffee    => 7,
+        _                  => 5
+    };
 
     public FoodType OrderedFood => orderedFood;
     public bool IsAtCounter     => isAtCounter;
@@ -178,6 +192,10 @@ public class Customer : MonoBehaviour
         {
             patienceBar.gameObject.SetActive(true);
             patienceBar.value = 1f;
+            if (patienceBarFill == null && patienceBar.fillRect != null)
+                patienceBarFill = patienceBar.fillRect.GetComponent<UnityEngine.UI.Image>();
+            if (patienceBarFill == null)
+                patienceBarFill = patienceBarFillImage;
         }
 
         // Play the order voice clip for the food type (Donut=1 → index 0, etc.)
@@ -185,7 +203,7 @@ public class Customer : MonoBehaviour
         {
             int idx = (int)orderedFood - 1;
             if (idx >= 0 && idx < orderVoiceClips.Length)
-                AudioManager.Instance.PlaySFX(orderVoiceClips[idx]);
+                AudioManager.Instance.PlaySFX(orderVoiceClips[idx], 0.4f);
         }
     }
 
@@ -200,6 +218,8 @@ public class Customer : MonoBehaviour
             float ratio = Mathf.Clamp01(timer / maxPatience);
 
             if (patienceBar != null) patienceBar.value = ratio;
+            if (patienceBarFill != null)
+                patienceBarFill.color = Color.Lerp(Color.red, Color.green, ratio);
             manager.UpdatePatience(ratio);
 
             if (!isImpatient && ratio <= impatientThreshold)
@@ -235,7 +255,7 @@ public class Customer : MonoBehaviour
             isServed = true;
             HideUI();
 
-            GameManager.Instance.AddMoney(moneyReward);
+            GameManager.Instance.AddMoney(FoodPrice(orderedFood));
 
             // Drop tip into the jar
             if (tipJar != null) tipJar.AddTip(tipAmount);
@@ -321,6 +341,6 @@ public class Customer : MonoBehaviour
     {
         if (clips == null || clips.Length == 0) return;
         if (index < 0 || index >= clips.Length) return;
-        AudioManager.Instance?.PlaySFX(clips[index]);
+        AudioManager.Instance?.PlaySFX(clips[index], 0.4f);
     }
 }

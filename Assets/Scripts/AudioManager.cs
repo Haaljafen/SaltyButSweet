@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameplayMusicFinal;
 
     [Header("SFX — Gameplay")]
-    public AudioClip correctOrderClip;
     public AudioClip wrongOrderClip;
+    public AudioClip counterFullClip;
     public AudioClip lifeLostClip;
     public AudioClip coinClip;
     public AudioClip trashClip;
@@ -36,17 +36,17 @@ public class AudioManager : MonoBehaviour
         if (sfxSource == null)
             sfxSource = sources.Length > 1 ? sources[1] : gameObject.AddComponent<AudioSource>();
 
-        musicSource.loop = true;  musicSource.playOnAwake = false; musicSource.volume = 0.2f;
+        musicSource.loop = true;  musicSource.playOnAwake = false; musicSource.volume = 0.03f;
         sfxSource.loop   = false; sfxSource.playOnAwake   = false;
 
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volume = 1f)
     {
         if (clip == null) return;
         if (sfxSource == null) return;
         if (!SettingsManager.CanPlaySound()) return;
-        sfxSource.PlayOneShot(clip);
+        sfxSource.PlayOneShot(clip, volume);
     }
 
     public void PlayMusic(AudioClip clip)
