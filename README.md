@@ -47,8 +47,4 @@ IT8101 — Games Development | Semester 6
 - [Background Music](https://www.youtube.com/watch?v=IMvGDoBz0MI) — In-game background music
 
 ### Images
-- [ChatGPT Plus](https://chatgpt.com) — AI-generated images (DALL·E)
-
-### Tools & Libraries
-- [Unity Technologies](https://unity.com) — Game engine
-- [TextMesh Pro](https://docs.unity3d.com/Manual/com.unity.textmeshpro.html) — UI text rendering
+- [ChatGPT Plus](https://chatgpt.com) — AI-generated images
