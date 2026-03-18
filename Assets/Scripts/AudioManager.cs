@@ -14,7 +14,6 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameplayMusicFinal;
 
     [Header("SFX — Gameplay")]
-    public AudioClip wrongOrderClip;
     public AudioClip counterFullClip;
     public AudioClip lifeLostClip;
     public AudioClip coinClip;

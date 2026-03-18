@@ -29,7 +29,6 @@ public class Customer : MonoBehaviour
     [Range(0f, 1f)]
     public float impatientThreshold = 0.3f;
     public Slider patienceBar; // World-space slider above customer (optional)
-    public UnityEngine.UI.Image patienceBarFillImage; // Drag the Fill image here
 
     [Header("Reward")]
     [Tooltip("Base money added to GameManager when this customer is served correctly")]
@@ -78,7 +77,6 @@ public class Customer : MonoBehaviour
 
     private Animator      animator;
     private Quaternion    counterFacingRot;
-    private UnityEngine.UI.Image patienceBarFill;
 
     static int FoodPrice(FoodType food) => food switch
     {
@@ -192,10 +190,6 @@ public class Customer : MonoBehaviour
         {
             patienceBar.gameObject.SetActive(true);
             patienceBar.value = 1f;
-            if (patienceBarFill == null && patienceBar.fillRect != null)
-                patienceBarFill = patienceBar.fillRect.GetComponent<UnityEngine.UI.Image>();
-            if (patienceBarFill == null)
-                patienceBarFill = patienceBarFillImage;
         }
 
         // Play the order voice clip for the food type (Donut=1 → index 0, etc.)
@@ -218,8 +212,6 @@ public class Customer : MonoBehaviour
             float ratio = Mathf.Clamp01(timer / maxPatience);
 
             if (patienceBar != null) patienceBar.value = ratio;
-            if (patienceBarFill != null)
-                patienceBarFill.color = Color.Lerp(Color.red, Color.green, ratio);
             manager.UpdatePatience(ratio);
 
             if (!isImpatient && ratio <= impatientThreshold)
